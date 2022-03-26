@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
 const styles = StyleSheet.create({
     container: {
@@ -8,12 +8,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-});
+})
 
 const App = () => (
     <View style={styles.container}>
         <Text>Open up App.tsx to start working!</Text>
     </View>
-);
+)
 
-export default App;
+export default App

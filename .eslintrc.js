@@ -24,5 +24,7 @@ module.exports = {
         'react/jsx-indent': [2, 4],
         'react/jsx-filename-extension': [0, { allow: 'always' }],
         'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
+        'linebreak-style': 0,
+        semi: ['error', 'never'],
     },
-};
+}
