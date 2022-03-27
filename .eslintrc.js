@@ -22,9 +22,13 @@ module.exports = {
     rules: {
         indent: ['error', 4],
         'react/jsx-indent': [2, 4],
+        'react/jsx-indent-props': [2, 4],
         'react/jsx-filename-extension': [0, { allow: 'always' }],
         'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
         'linebreak-style': 0,
         semi: ['error', 'never'],
+        'no-undef': 'off',
+        'import/extensions': 'off',
+        'import/no-unresolved': 'off',
     },
 }

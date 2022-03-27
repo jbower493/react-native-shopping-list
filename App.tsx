@@ -1,5 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+import axios from 'axios'
+import GuestRouter from './src/router/guestRouter'
+
+axios.defaults.baseURL = 'localhost:4500'
+axios.defaults.withCredentials = true
 
 const styles = StyleSheet.create({
     container: {
@@ -10,9 +15,9 @@ const styles = StyleSheet.create({
     },
 })
 
-const App = () => (
+const App = (): JSX.Element => (
     <View style={styles.container}>
-        <Text>Open up App.tsx to start working!</Text>
+        <GuestRouter />
     </View>
 )
 
