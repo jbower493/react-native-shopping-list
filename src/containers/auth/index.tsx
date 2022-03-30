@@ -1,10 +1,14 @@
-import React from 'react'
-import { View } from 'react-native'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-native'
 
-const Auth = () => (
-    <View>
-        Auth
-    </View>
-)
+const Auth = (): null => {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        navigate('/register')
+    }, [])
+
+    return null
+}
 
 export default Auth

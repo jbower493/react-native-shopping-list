@@ -30,5 +30,6 @@ module.exports = {
         'no-undef': 'off',
         'import/extensions': 'off',
         'import/no-unresolved': 'off',
+        'arrow-parens': ['error', 'as-needed'],
     },
 }
