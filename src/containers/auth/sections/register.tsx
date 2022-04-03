@@ -1,16 +1,31 @@
 import React from 'react'
-import { Text, View, Button } from 'react-native'
-import { useNavigate } from 'react-router-native'
+import {
+    Text,
+    View,
+    Button,
+    StyleSheet,
+} from 'react-native'
 
-const Register = (): JSX.Element => {
-    const navigate = useNavigate()
+const styles = StyleSheet.create({
+    centered: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+})
 
-    return (
-        <View>
-            <Text>Register</Text>
-            <Button title="Go to Login" onPress={() => navigate('/login')} />
-        </View>
-    )
+interface RegisterProps {
+    navigation: any
 }
+
+const Register = ({ navigation }: RegisterProps): JSX.Element => (
+    <View style={styles.centered}>
+        <Text>Register</Text>
+        <Button
+            title="Go to Login"
+            onPress={() => navigation.navigate('Login')}
+        />
+    </View>
+)
 
 export default Register

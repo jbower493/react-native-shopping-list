@@ -1,21 +1,15 @@
 import React from 'react'
-import {
-    NativeRouter,
-    Route,
-    Routes,
-} from 'react-router-native'
-import Auth from 'src/containers/auth'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Register from 'src/containers/auth/sections/register'
 import Login from 'src/containers/auth/sections/login'
 
+const Stack = createNativeStackNavigator()
+
 const GuestRouter = (): JSX.Element => (
-    <NativeRouter>
-        <Routes>
-            <Route path="/" element={<Auth />} />
-            <Route path="register" element={<Register />} />
-            <Route path="login" element={<Login />} />
-        </Routes>
-    </NativeRouter>
+    <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Register" component={Register} />
+    </Stack.Navigator>
 )
 
 export default GuestRouter
