@@ -3,16 +3,8 @@ import {
     Text,
     View,
     Button,
-    StyleSheet,
 } from 'react-native'
-
-const styles = StyleSheet.create({
-    centered: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-})
+import styles from 'src/styles'
 
 interface RegisterProps {
     navigation: any
