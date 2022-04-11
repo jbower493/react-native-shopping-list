@@ -31,5 +31,9 @@ module.exports = {
         'import/extensions': 'off',
         'import/no-unresolved': 'off',
         'arrow-parens': ['error', 'as-needed'],
+        'no-shadow': 'off',
+        '@typescript-eslint/no-shadow': ['off'],
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': 'error',
     },
 }

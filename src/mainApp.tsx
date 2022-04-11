@@ -6,10 +6,10 @@ import { AuthContext, AuthContextValue } from 'src/containers/auth/authContext'
 
 const MainApp = (): JSX.Element => {
     const auth = useContext<AuthContextValue>(AuthContext)
-console.log(auth)
+
     return (
         <NavigationContainer>
-            {auth.loggedIn
+            {auth.auth_get_user_data
                 ? <UserRouter />
                 : <GuestRouter />}
         </NavigationContainer>
