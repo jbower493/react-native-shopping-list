@@ -3,7 +3,7 @@ import axios from 'axios'
 import MainApp from 'src/mainApp'
 import AuthContextProvider from 'src/containers/auth/authContext'
 
-axios.defaults.baseURL = 'localhost:4500'
+axios.defaults.baseURL = 'https://c156-122-110-208-224.ngrok.io'
 
 const App = (): JSX.Element => (
     <AuthContextProvider>

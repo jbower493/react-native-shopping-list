@@ -41,7 +41,7 @@ const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         setGetUserStatus(Statuses.Loading)
         axios.get('/api/auth/get-user', {
             headers: {
-                Authorization: `Bearer ${''}`,
+                Authorization: `Bearer ${'152e6745-00e6-4f08-a43d-1678110377e0'}`,
             },
         })
             .then(response => {

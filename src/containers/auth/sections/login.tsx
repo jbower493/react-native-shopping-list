@@ -24,7 +24,6 @@ const Login = ({ navigation }: LoginProps): JSX.Element => {
                 title="Get User"
                 onPress={auth.getUser}
             />
-            <Text>{auth.auth_get_user_data ? 'Mate' : 'not mate'}</Text>
         </View>
     )
 }
