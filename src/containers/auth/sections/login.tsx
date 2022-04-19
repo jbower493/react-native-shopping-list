@@ -1,10 +1,22 @@
 import React, { useContext } from 'react'
 import {
     View,
-    Text,
-    Button,
+    StyleSheet,
 } from 'react-native'
+import Button from 'src/components/Button'
 import { AuthContext, AuthContextValue } from 'src/containers/auth/authContext'
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'lightgrey',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    loginButton: {
+        marginBottom: 20,
+    },
+})
 
 interface LoginProps {
     navigation: any
@@ -14,15 +26,18 @@ const Login = ({ navigation }: LoginProps): JSX.Element => {
     const auth = useContext<AuthContextValue>(AuthContext)
 
     return (
-        <View>
-            <Text>Login</Text>
+        <View style={styles.container}>
             <Button
-                title="Go to Register"
-                onPress={() => navigation.navigate('Register')}
+                style={styles.loginButton}
+                text="Login"
+                onPress={() => auth.login({
+                    username: 'Jamie',
+                    password: 'password',
+                })}
             />
             <Button
-                title="Get User"
-                onPress={auth.getUser}
+                text="Go to Register"
+                onPress={() => navigation.navigate('Register')}
             />
         </View>
     )
