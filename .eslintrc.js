@@ -27,6 +27,7 @@ module.exports = {
         'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
         'linebreak-style': 0,
         semi: ['error', 'never'],
+        camelcase: 'off',
         'no-undef': 'off',
         'import/extensions': 'off',
         'import/no-unresolved': 'off',

@@ -1,10 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import {
     View,
+    Text,
+    TextInput,
     StyleSheet,
 } from 'react-native'
 import Button from 'src/components/Button'
-import { AuthContext, AuthContextValue } from 'src/containers/auth/authContext'
+import { AuthContext, AuthContextValue, Statuses } from 'src/containers/auth/authContext'
+import theme from 'src/styles'
 
 const styles = StyleSheet.create({
     container: {
@@ -16,6 +19,14 @@ const styles = StyleSheet.create({
     loginButton: {
         marginBottom: 20,
     },
+    input: {
+        height: 40,
+        width: theme.button.width,
+        borderWidth: 1,
+        borderColor: 'black',
+        marginBottom: 20,
+        padding: 10,
+    },
 })
 
 interface LoginProps {
@@ -23,24 +34,44 @@ interface LoginProps {
 }
 
 const Login = ({ navigation }: LoginProps): JSX.Element => {
-    const auth = useContext<AuthContextValue>(AuthContext)
+    const [username, setUsername] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
 
-    return (
-        <View style={styles.container}>
-            <Button
-                style={styles.loginButton}
-                text="Login"
-                onPress={() => auth.login({
-                    username: 'Jamie',
-                    password: 'password',
-                })}
-            />
-            <Button
-                text="Go to Register"
-                onPress={() => navigation.navigate('Register')}
-            />
-        </View>
-    )
+    const {
+        login,
+        auth_login_status,
+    } = useContext<AuthContextValue>(AuthContext)
+
+    return auth_login_status === Statuses.Loading
+        ? <Text>Loading</Text>
+        : (
+            <View style={styles.container}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Username"
+                    onChangeText={(value: string): void => setUsername(value)}
+                    value={username}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Password"
+                    onChangeText={(value: string): void => setPassword(value)}
+                    value={password}
+                />
+                <Button
+                    style={styles.loginButton}
+                    text="Login"
+                    onPress={() => login({
+                        username,
+                        password,
+                    })}
+                />
+                <Button
+                    text="Go to Register"
+                    onPress={() => navigation.navigate('Register')}
+                />
+            </View>
+        )
 }
 
 export default Login

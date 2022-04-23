@@ -1,11 +1,13 @@
-import { StyleSheet } from 'react-native'
+interface Theme {
+    button: {
+        width: number;
+    }
+}
 
-const styles = StyleSheet.create({
-    centered: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+const theme: Theme = {
+    button: {
+        width: 150,
     },
-})
+}
 
-export default styles
+export default theme

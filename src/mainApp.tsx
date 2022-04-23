@@ -3,24 +3,29 @@ import { NavigationContainer } from '@react-navigation/native'
 import { Text } from 'react-native'
 import UserRouter from 'src/router/userRouter'
 import GuestRouter from 'src/router/guestRouter'
-import { AuthContext, AuthContextValue } from 'src/containers/auth/authContext'
+import { AuthContext, AuthContextValue, Statuses } from 'src/containers/auth/authContext'
 
 const MainApp = (): JSX.Element => {
-    const auth = useContext<AuthContextValue>(AuthContext)
+    const {
+        getUser,
+        auth_get_user_status,
+        auth_get_user_data,
+        auth_logout_status,
+    } = useContext<AuthContextValue>(AuthContext)
 
     useEffect(() => {
-        auth.getUser()
+        getUser()
     }, [])
 
     const renderApp = () => (
-        auth.auth_get_user_data
+        auth_get_user_data
             ? <UserRouter />
             : <GuestRouter />
     )
 
     return (
         <NavigationContainer>
-            {auth.auth_get_user_status === 'loading'
+            {auth_get_user_status === Statuses.Loading || auth_logout_status === Statuses.Loading
                 ? <Text>Loading</Text>
                 : renderApp()}
         </NavigationContainer>

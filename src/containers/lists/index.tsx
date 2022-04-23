@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
     Text,
     View,
     StyleSheet,
 } from 'react-native'
+import Button from 'src/components/Button'
+import { AuthContext, AuthContextValue } from 'src/containers/auth/authContext'
 
 const styles = StyleSheet.create({
     centered: {
@@ -13,10 +15,18 @@ const styles = StyleSheet.create({
     },
 })
 
-const Lists = (): JSX.Element => (
-    <View style={styles.centered}>
-        <Text>List</Text>
-    </View>
-)
+const Lists = (): JSX.Element => {
+    const { logout } = useContext<AuthContextValue>(AuthContext)
+
+    return (
+        <View style={styles.centered}>
+            <Text>List</Text>
+            <Button
+                text="Logout"
+                onPress={logout}
+            />
+        </View>
+    )
+}
 
 export default Lists
