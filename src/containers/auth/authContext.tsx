@@ -5,7 +5,8 @@ import React, {
     useMemo,
 } from 'react'
 import axios from 'axios'
-import * as SecureStore from 'expo-secure-store'
+import authorizedAxios from 'src/helpers/api'
+import secureStore from 'src/helpers/secureStore'
 
 export enum Statuses {
     None = 'none',
@@ -53,30 +54,6 @@ export const AuthContext = createContext<AuthContextValue>({
     auth_logout_status: Statuses.None,
 })
 
-interface SecureStoreT {
-    keys: {
-        authToken: string;
-    },
-    save: (key: string, value: string) => Promise<void>;
-    get: (key: string) => Promise<string | null>;
-}
-
-export const secureStore: SecureStoreT = {
-    keys: {
-        authToken: 'auth_token',
-    },
-
-    async save(key, value) {
-        await SecureStore.setItemAsync(key, value)
-    },
-
-    async get(key) {
-        const value = await SecureStore.getItemAsync(key)
-
-        return value || null
-    },
-}
-
 const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const [getUserStatus, setGetUserStatus] = useState<Statuses>(Statuses.None)
     const [getUserData, setGetUserData] = useState<User | null>(null)
@@ -89,23 +66,16 @@ const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const getUser = () => {
         setGetUserStatus(Statuses.Loading)
 
-        // Check for existing auth token in secure store
-        secureStore.get(secureStore.keys.authToken)
-            .then(token => {
-                axios({
-                    method: 'get',
-                    url: '/api/auth/get-user',
-                    headers: {
-                        Authorization: `Bearer ${token || ''}`,
-                    },
-                })
-                    .then(response => {
-                        setGetUserStatus(Statuses.Success)
-                        setGetUserData(response.data.user)
-                    })
-                    .catch(() => {
-                        setGetUserStatus(Statuses.Error)
-                    })
+        authorizedAxios({
+            method: 'get',
+            url: '/api/auth/get-user',
+        })
+            .then(response => {
+                setGetUserStatus(Statuses.Success)
+                setGetUserData(response.data.user)
+            })
+            .catch(() => {
+                setGetUserStatus(Statuses.Error)
             })
     }
 
@@ -135,23 +105,19 @@ const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const logout = () => {
         setLogoutStatus(Statuses.Loading)
 
-        // Check for existing auth token in secure store
-        secureStore.get(secureStore.keys.authToken)
-            .then(token => {
-                axios({
-                    method: 'get',
-                    url: '/api/auth/logout',
-                    headers: {
-                        Authorization: `Bearer ${token || ''}`,
-                    },
-                })
+        authorizedAxios({
+            method: 'get',
+            url: '/api/auth/logout',
+        })
+            .then(() => {
+                secureStore.delete(secureStore.keys.authToken)
                     .then(() => {
                         setLogoutStatus(Statuses.Success)
                         setGetUserData(null)
                     })
-                    .catch(() => {
-                        setLogoutStatus(Statuses.Error)
-                    })
+            })
+            .catch(() => {
+                setLogoutStatus(Statuses.Error)
             })
     }
 
