@@ -2,12 +2,15 @@ import React from 'react'
 import axios from 'axios'
 import MainApp from 'src/mainApp'
 import AuthContextProvider from 'src/containers/auth/authContext'
+import ListsContextProvider from 'src/containers/lists/listsContext'
 
-axios.defaults.baseURL = 'https://3a94-175-34-116-227.au.ngrok.io'
+axios.defaults.baseURL = 'https://8c5e-86-11-142-5.eu.ngrok.io'
 
 const App = (): JSX.Element => (
     <AuthContextProvider>
-        <MainApp />
+        <ListsContextProvider>
+            <MainApp />
+        </ListsContextProvider>
     </AuthContextProvider>
 )
 

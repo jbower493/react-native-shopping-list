@@ -4,18 +4,21 @@ import {
     Text,
     TextInput,
     StyleSheet,
+    ViewStyle,
+    TextStyle,
 } from 'react-native'
 import Button from 'src/components/Button'
 import { AuthContext, AuthContextValue, Statuses } from 'src/containers/auth/authContext'
 import theme from 'src/styles'
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'lightgrey',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+type Style = {
+    container: ViewStyle;
+    loginButton: ViewStyle;
+    input: TextStyle
+}
+
+const styles = StyleSheet.create<Style>({
+    container: theme.page,
     loginButton: {
         marginBottom: 20,
     },

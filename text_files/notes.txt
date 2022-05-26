@@ -1,0 +1,3 @@
+NGROK command
+In powershell / windows terminal:
+ngrok http 4500
